@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>JS Animation</title>
+        <style>
+            body{
+                background-color: rgb(9, 4, 41);
+            }
+            p{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            button{
+                font-size: 17pt;
+                color: crimson;
+                border-radius: 10px;
+                border-color: darkmagenta;
+            }
+            #fortune_teller{
+                background-color: darksalmon;
+                border-radius: 10px;
+                padding-left: 2%;
+                border-width: 150%;
+            }
+            #stop_watch{
+                background-color: rgb(15, 228, 228);
+                border-radius: 10px;
+                padding-left: 2%;
+            }
+            #time{
+                font-size: 55pt;
+            }
+            #answer_place{
+                font-size: 16pt;
+            }
+            #hero_animation{
+                background-color: rgb(255, 255, 255);
+            }
+            #hero_image{
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="fortune_teller">
+            <h3>Fortune Teller</h3>
+            <p>Think of a YES or NO question and hit the button to get an answer</p>
+            <button onclick="get_fortune()">Get Answer:</button>
+            <p>Answer is : <span id="answer_place"></span></p>
+        </div>
+
+
+        <div id="stop_watch">
+            <h3>Stop Watch</h3>
+            <p>Click start to start timing</p>
+            <button id="start_button"onclick="start_timer()">Start</button>
+            <button onclick="stop_timer()">Stop</button>
+            <button id="reset" onclick="reset_timer()">Reset</button>
+            <div id = "time">0</div>
+        </div>
+
+        <div id="hero_animation">
+            <h3>The 7th Knight (Animation)</h3>
+            <p>Click to command the &th Knight</p>
+            <button onclick="move_hero()">Move</button><br>
+            <img id ="hero_image" onclick="move_hero()" src="images/hero2.jpg">
+        </div>
+
+        <script>
+            function get_fortune(){
+                var rand = Math.round(Math.random()*2);
+                console.log(rand);
+                var answer= '';
+                if(rand == 2){
+                    answer='YES!';
+                }else if(rand == 1){
+                    answer='MAYBE...!';
+                }else{
+                    answer="NO!";
+                }
+                document.getElementById("answer_place").innerHTML=answer;
+
+            }
+
+            var time =0;
+            var keep_counting = true;
+            function start_timer(){
+                if(keep_counting==true){
+                    document.getElementById("start_button").disabled =true;
+                    time = time + 1;
+                    document.getElementById("time").innerHTML=time;
+                    setTimeout(start_timer,200);
+                }else{
+                    document.getElementById("time").innerHTML=time;
+                    document.getElementById("start_button").innerHTML="Continue";
+                    keep_counting=true;
+                }
+            }
+            
+            function stop_timer(){
+                keep_counting = false;
+                document.getElementById("start_button").disabled =false;
+            }
+
+            function reset_timer(){
+                keep_counting = false;
+                time=0;
+                document.getElementById("time").innerHTML=time;
+                document.getElementById("start_button").innerHTML="Start";
+                document.getElementById("start_button").disabled =false;
+                keep_counting=true;
+            }
+            var left =0;
+            function move_hero(){
+                if(left<500){
+                    left=left+10;
+                }else{
+                    left=-500;
+                }
+                document.getElementById("hero_image").style.left=left+'px';
+                setTimeout(move_hero,100);
+            }
+        </script>
+    </body>
+</html>
