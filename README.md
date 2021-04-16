@@ -1,1 +1,1 @@
-This isnt some sort of complete project but rather a webpage (index.html) containing my own javascript practices
+Project to help JS newbies tto learn and master basic JS concepts
